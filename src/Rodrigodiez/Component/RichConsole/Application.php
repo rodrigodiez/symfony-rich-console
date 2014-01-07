@@ -184,8 +184,8 @@ class Application extends ConsoleApplication
         $resolver = new OptionsResolver();
         $resolver->setOptional(array('root', 'config'));
         $resolver->setDefaults(array(
-                'root' => __DIR__ . '/../../../../',
-                'config' => __DIR__ . '/../../../../app/config'
+                'root' => __DIR__ . '/../../../../../../../',
+                'config' => __DIR__ . '/../../../../../../../app/config'
             ));
 
         return $resolver->resolve($paths);
