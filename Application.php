@@ -32,29 +32,21 @@ class Application extends ConsoleApplication
      */
     protected $appInfo = array();
 
-    /**
-     * @var array
-     */
-    protected $paths = array();
-
 
     /**
-     * @param null $paths
-     * @param array $configFiles
+     * @param null $configPath
+     * @param array $configFilenames
      */
-    function __construct($paths = null, array $configFiles = array())
+    function __construct($configPath = null, $configFilenames = array())
     {
+        $configPath = $configPath == null? __DIR__ . '/../../../../../../app/config': $configPath;
         $this->container = new ContainerBuilder();
 
-        // Validate paths and set them in the container for later use
-        $this->paths = $this->getPaths($paths == null? array(): $paths);
-        $this->container->setParameter('application.paths', $this->paths);
-
         // Load app parameters and config files into container
-        $loader = new YamlFileLoader($this->container, new FileLocator($this->paths['config']));
+        $loader = new YamlFileLoader($this->container, new FileLocator($configPath));
         $loader->load('parameters.yml');
 
-        foreach ($configFiles as $filename) {
+        foreach ($configFilenames as $filename) {
             $loader->load($filename);
         }
 
@@ -173,22 +165,6 @@ class Application extends ConsoleApplication
 
             $definition->addMethodCall('addSubscriberService', array($id, $class));
         }
-    }
-
-    /**
-     * @param array $paths
-     * @return array
-     */
-    protected function getPaths(array $paths)
-    {
-        $resolver = new OptionsResolver();
-        $resolver->setOptional(array('root', 'config'));
-        $resolver->setDefaults(array(
-                'root' => __DIR__ . '/../../../../../../',
-                'config' => __DIR__ . '/../../../../../../app/config'
-            ));
-
-        return $resolver->resolve($paths);
     }
 }
  
