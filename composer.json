@@ -21,7 +21,8 @@
     },
     "autoload": {
         "psr-0": {
-            "": "src/"
+            "Rodrigodiez\\Component\\RichConsole\\": ""
         }
-    }
+    },
+    "target-dir": "Rodrigodiez/Component/RichConsole"
 }
