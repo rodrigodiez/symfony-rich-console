@@ -1,7 +1,11 @@
 # Symfony rich console
-This component integrates both *Symfony Dependency Injection* and *Symfony Event Dispatcher* components into *Symfony Console* component. This way you can define and use *parameters*, *services*, *event listeners*, *event subscribers*, etc in your console applications.
+This component integrates both *Symfony Dependency Injection* and *Symfony Event Dispatcher* components into *Symfony Console* applications.
 
-> Note: This is only intended for using with *Symfony Console* **standalone** applications, not web framework ones.
+This way you can define and use *parameters*, *services*, *event listeners*, *event subscribers*, etc in your console applications.
+
+It is a *Symfony Console* with steroids!
+
+> Note: This is only intended if dealing with *Symfony Console* **standalone** applications, not web framework ones.
 
 
 ## Example:
@@ -22,8 +26,6 @@ This component integrates both *Symfony Dependency Injection* and *Symfony Event
         $input->writeln('My listeners says ' . $event->getValue());
     }
 ```
-
-It is a *Symfony Console* with steroids!
 
 ## Installation
 ### Download it using composer
