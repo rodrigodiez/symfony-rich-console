@@ -33,7 +33,7 @@ Add `rodrigodiez/symfony-rich-console` to your `composer.json`
         "rodrigodiez/symfony-rich-console": "dev-master"
     }
 }
-``
+```
 
 ### Create a console
 You need a entry point file to instantiate and run your application. You can create it at `app/console`.
