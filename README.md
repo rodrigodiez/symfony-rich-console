@@ -5,6 +5,7 @@ This component integrates both *Symfony Dependency Injection* and *Symfony Event
 
 
 ## Example:
+
 ```php
     public function run(InputInterface $input, OutputInterface $output)
     {
@@ -20,6 +21,7 @@ This component integrates both *Symfony Dependency Injection* and *Symfony Event
         $this->container->get('event_dispatcher')->dispatch('custom.event', $event);
         $input->writeln('My listeners says ' . $event->getValue());
     }
+```
 
 It is a *Symfony Console* with steroids!
 
