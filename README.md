@@ -39,6 +39,12 @@ Add `rodrigodiez/symfony-rich-console` to your `composer.json`
 }
 ```
 
+Now, tell composer to download the component by typing
+
+```bash
+$ php composer.phar update rodrigodiez/symfony-rich-console
+``
+
 ### 2. Create a console
 You need a entry point file to instantiate and run your application. You can create it at `app/console`.
 
@@ -61,7 +67,7 @@ The Application class constructor receives two **optional** parameters:
 - **configPath**: String containing the config path. The application will try to find here the required `parameters.yml` file and other configuration files. Defaults to `app/config`.
 - **configFilenames**: Array of file names located in `$configPath` which you want to be loaded into the *container*. Ej: `array('services.yml')`. You typically will define your *commands*, *services*, *listeners*, *subscribers*, etc in these files.
 
-### Create a `parameters.yml` file
+### 2. Create a `parameters.yml` file
 This file is **mandatory**, it **must** be located in your `configPath` and it **must** contain, at least, the following info:
 
 ```yaml
@@ -72,7 +78,13 @@ parameters:
 ```
 
 ### 3. Done!
-Now you can execute your app by typing `php app/console` but the result may be disappointing. This is because we didn't yet registered any commands into the application.
+Now you can execute your app by typing...
+
+```bash
+$php app/console
+```
+
+... but the result may be disappointing. This is because we didn't yet registered any commands into the application.
 
 ## Adding a configuration file
 To be able to define your services (commands are defined as services too) it is necessary to create a configuration file in `configPath` and tell the application to load it:
@@ -89,6 +101,7 @@ $app = new Application(null, array('services.yml'));
 Simply register your command as a service and tag it as `console.command`.
 
 ```yaml
+# app/config/services.yml
 services:
     command_service:
         class: Your\Namespace\YourCommand
@@ -101,6 +114,7 @@ If your command class implements `Symfony\\Component\\DependencyInjection\\Conta
 ## Registering listeners and subscribers
 
 ```yaml
+# app/config/services.yml
 services:
     listener_service:
         class: Your\Namespace\YourListener
@@ -114,5 +128,5 @@ services:
 ```
 
 ## That is all!
-I hope this to be useful. Comments, issue reports and improvements will be appreciated :)
+I hope this to be useful to somebody. Comments, issue reports and pull requests will be appreciated :)
 
