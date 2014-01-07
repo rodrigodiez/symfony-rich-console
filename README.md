@@ -1,9 +1,10 @@
 # Symfony rich console
-This component integrates both *Symfony Dependency Injection Container* and *Symfony Event Dispatcher* into *Symfony Console* component. This way you can define and use your own *parameters*, *services*, *event listeners*, *event subscribers*, etc on your standalone console applications.
+This component integrates both *Symfony Dependency Injection* and *Symfony Event Dispatcher* components into *Symfony Console* component. This way you can define and use *parameters*, *services*, *event listeners*, *event subscribers*, etc in your console applications.
 
 > Note: This is only intended for using with *Symfony Console* **standalone** applications, not web framework ones.
 
 
+## Example:
 ```php
     public function run(InputInterface $input, OutputInterface $output)
     {
@@ -20,7 +21,7 @@ This component integrates both *Symfony Dependency Injection Container* and *Sym
         $input->writeln('My listeners says ' . $event->getValue());
     }
 
-It's a *Symfony Console* with steroids!
+It is a *Symfony Console* with steroids!
 
 ## Installation
 ### Download it using composer
@@ -53,8 +54,8 @@ $app->run();
 
 The Application class constructor receives two **optional** parameters:
 
-    - configPath: String containing the config path. The application will try to find here the required `parameters.yml` file and other configuration files. Defaults to `app/config`.
-    - configFilenames: Array of file names located in `$configPath` which you want to be loaded into the *container*. Ej: `array('services.yml')`. You typically will define your *commands*, *services*, *listeners*, *subscribers*, etc in these files.
+- configPath: String containing the config path. The application will try to find here the required `parameters.yml` file and other configuration files. Defaults to `app/config`.
+- configFilenames: Array of file names located in `$configPath` which you want to be loaded into the *container*. Ej: `array('services.yml')`. You typically will define your *commands*, *services*, *listeners*, *subscribers*, etc in these files.
 
 ### Create a `parameters.yml` file
 This file is **mandatory**, it **must** be located in your `configPath` and it **must** contain, at least, the following info:
@@ -66,7 +67,48 @@ parameters:
         version: your_application_version
 ```
 
-Done! Now you can execute your app by typing `php app/console` but the result may be disappointing. This is because we didn't yet registered any commands into your application.
+### Done!
+Now you can execute your app by typing `php app/console` but the result may be disappointing. This is because we didn't yet registered any commands into the application.
 
+## Adding a configuration file
+To be able to define your services (commands are defined as services too) it is necessary to create a configuration file in `configPath` and tell the application to load it:
 
+```php
+//app/console
+
+//...
+$app = new Application(null, array('services.yml'));
+//...
+```
+
+## Registering commands
+Simply register your command as a service and tag it as `console.command`.
+
+```yaml
+services:
+    command_service:
+        class: Your\Namespace\YourCommand
+        tags:
+            - { name: console.command }
+```
+
+If your command class implements `Symfony\\Component\\DependencyInjection\\ContainerAwareInterface` then container will be injected and you can retrieve it through its `$container` property.
+
+## Registering listeners and subscribers
+
+```yaml
+services:
+    listener_service:
+        class: Your\Namespace\YourListener
+        tags:
+            - { name: kernel.event_listener, method: onEventMethod }
+
+    subscriber_service:
+        class: Your\Namespace\YourSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+```
+
+## That is all!
+I hope this to be useful. Comments, issue reports and improvements will be appreciated :)
 
