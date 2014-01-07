@@ -43,7 +43,7 @@ Now, tell composer to download the component by typing
 
 ```bash
 $ php composer.phar update rodrigodiez/symfony-rich-console
-``
+```
 
 ### 2. Create a console
 You need a entry point file to instantiate and run your application. You can create it at `app/console`.
