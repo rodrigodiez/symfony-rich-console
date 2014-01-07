@@ -28,7 +28,7 @@ It is a *Symfony Console* with steroids!
 ```
 
 ## Installation
-### Download it using composer
+### 1. Download it using composer
 Add `rodrigodiez/symfony-rich-console` to your `composer.json`
 
 ```js
@@ -39,7 +39,7 @@ Add `rodrigodiez/symfony-rich-console` to your `composer.json`
 }
 ```
 
-### Create a console
+### 2. Create a console
 You need a entry point file to instantiate and run your application. You can create it at `app/console`.
 
 ```php
@@ -58,8 +58,8 @@ $app->run();
 
 The Application class constructor receives two **optional** parameters:
 
-- configPath: String containing the config path. The application will try to find here the required `parameters.yml` file and other configuration files. Defaults to `app/config`.
-- configFilenames: Array of file names located in `$configPath` which you want to be loaded into the *container*. Ej: `array('services.yml')`. You typically will define your *commands*, *services*, *listeners*, *subscribers*, etc in these files.
+- **configPath**: String containing the config path. The application will try to find here the required `parameters.yml` file and other configuration files. Defaults to `app/config`.
+- **configFilenames**: Array of file names located in `$configPath` which you want to be loaded into the *container*. Ej: `array('services.yml')`. You typically will define your *commands*, *services*, *listeners*, *subscribers*, etc in these files.
 
 ### Create a `parameters.yml` file
 This file is **mandatory**, it **must** be located in your `configPath` and it **must** contain, at least, the following info:
@@ -71,7 +71,7 @@ parameters:
         version: your_application_version
 ```
 
-### Done!
+### 3. Done!
 Now you can execute your app by typing `php app/console` but the result may be disappointing. This is because we didn't yet registered any commands into the application.
 
 ## Adding a configuration file
