@@ -1,6 +1,6 @@
 {
     "name": "rodrigodiez/symfony-rich-console",
-    "description": "Integrates both Dependency Injection Container and Event dispatcher into your non framework console applications",
+    "description": "Integrates both Dependency Injection and Event Dispatcher components into non framework Symfony Console applications",
     "license": "MIT",
     "authors": [
         {
@@ -14,18 +14,20 @@
         "symfony/console": ">=2.3",
         "symfony/dependency-injection": ">=2.3",
         "symfony/finder": ">=2.3",
+        "symfony/yaml": ">=2.3",
         "symfony/config": ">=2.3",
         "symfony/options-resolver": ">=2.3",
         "symfony/event-dispatcher": ">=2.3"
     },
     "autoload": {
         "psr-0": {
-            "": "src/"
+            "Rodrigodiez\\Component\\RichConsole\\": ""
         }
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
-    }
+    },
+    "target-dir": "Rodrigodiez/Component/RichConsole"
 }
