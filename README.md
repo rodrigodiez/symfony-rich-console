@@ -4,7 +4,7 @@ This component integrates both *Symfony Dependency Injection* and *Symfony Event
 > Note: This is only intended if dealing with *Symfony Console* **standalone** applications, not web framework ones.
 
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/rodrigodiez/symfony-rich-console/badges/quality-score.png?s=13eb32ae317f50cf5bdd5a166554dd72e0b21cdc)](https://scrutinizer-ci.com/g/rodrigodiez/symfony-rich-console/)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a8297e5f-7fd1-4974-b0f0-cfcbc6a28917/big.png)](https://insight.sensiolabs.com/projects/a8297e5f-7fd1-4974-b0f0-cfcbc6a28917)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a8297e5f-7fd1-4974-b0f0-cfcbc6a28917/mini.png)](https://insight.sensiolabs.com/projects/a8297e5f-7fd1-4974-b0f0-cfcbc6a28917)
 
 ## Example:
 
