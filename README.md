@@ -50,7 +50,7 @@ You need a entry point file to instantiate and run your application. You can cre
 #!/usr/bin/env php
 
 <?php
-use Rodrigodiez\Component\RichConsole\Application;
+use Rodrigodiez\Component\RichConsole\Console\Application;
 
 require_once('vendor/autoload.php');
 
