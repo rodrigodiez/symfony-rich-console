@@ -26,12 +26,6 @@ class Application extends ConsoleApplication
     protected $dispatcher;
 
     /**
-     * @var array|mixed
-     */
-    protected $appInfo = array();
-
-
-    /**
      * @param null $configPath
      * @param array $configFilenames
      */
@@ -48,8 +42,9 @@ class Application extends ConsoleApplication
             $loader->load($filename);
         }
 
-        $this->appInfo = $this->container->getParameter('application.info');
-        parent::__construct($this->appInfo['name'], $this->appInfo['version']);
+        $appName = $this->container->getParameter('application_name');
+        $appVersion = $this->container->getParameter('application_version');
+        parent::__construct($appName, $appVersion);
 
         // Set dispatcher definition, register listeners and subscribers
         $dispatcherDef = $this->container->register('event_dispatcher', 'Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher');
