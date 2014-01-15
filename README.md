@@ -70,9 +70,8 @@ This file is **mandatory**, it **must** be located in your `configPath` and it *
 
 ```yaml
 parameters:
-    application.info:
-        name: your_aplication_name
-        version: your_application_version
+    application_name: your_application_name
+    application_version: your_application_version
 ```
 
 ### 3. Done!
