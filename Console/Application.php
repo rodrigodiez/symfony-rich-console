@@ -1,6 +1,6 @@
 <?php
 
-namespace Rodrigodiez\Component\RichConsole\Console\Application;
+namespace Rodrigodiez\Component\RichConsole\Console;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application as ConsoleApplication;
@@ -26,17 +26,19 @@ class Application extends ConsoleApplication
     protected $dispatcher;
 
     /**
-     * @param null $configPath
+     * @param array $configPaths
      * @param array $configFilenames
      */
-    function __construct($configPath = null, $configFilenames = array())
+    public function __construct($configDirs = array(), $configFilenames = array())
     {
-        $configPath = $configPath == null? __DIR__ . '/../../../../../../app/config': $configPath;
+        $configDirs = empty($configDirs)? [__DIR__ . '/../../../../../../../app/config']: $configDirs;
         $this->container = new ContainerBuilder();
 
         // Load app parameters and config files into container
-        $loader = new YamlFileLoader($this->container, new FileLocator($configPath));
-        $loader->load('parameters.yml');
+        $loader = new YamlFileLoader($this->container, new FileLocator($configDirs));
+        if (!in_array('parameters.yml', $configFilenames)) {
+            array_push($configFilenames, 'parameters.yml');
+        }
 
         foreach ($configFilenames as $filename) {
             $loader->load($filename);
@@ -158,6 +160,14 @@ class Application extends ConsoleApplication
 
             $definition->addMethodCall('addSubscriberService', array($id, $class));
         }
+    }
+
+    /**
+     * @return ContainerBuilder
+     */
+    public function getContainer()
+    {
+        return $this->container;
     }
 }
  
