@@ -12,15 +12,15 @@ This component integrates both *Symfony Dependency Injection* and *Symfony Event
     public function run(InputInterface $input, OutputInterface $output)
     {
         // You can access services
-        $myService = $this->container->get('my_service');
+        $myService = $this->getApplication()->getContainer()->get('my_service');
         $input->writeln('My service says ' . $myService->hello());
 
         // You can get parameters
-        $myParam = $this->container->getParameter('my_param');
+        $myParam = $this->getApplication()->getContainer()->getParameter('my_param');
 
         // You can dispatch events and these will be received by their listeners / subscribers
         $event = new Event();
-        $this->container->get('event_dispatcher')->dispatch('custom.event', $event);
+        $this->getApplication()->getContainer()->get('event_dispatcher')->dispatch('custom.event', $event);
         $input->writeln('My listeners says ' . $event->getValue());
     }
 ```
@@ -62,11 +62,14 @@ $app->run();
 
 The Application class constructor receives two **optional** parameters:
 
-- **configPath**: String containing the config path. The application will try to find here the required `parameters.yml` file and other configuration files. Defaults to `app/config`.
-- **configFilenames**: Array of file names located in `$configPath` which you want to be loaded into the *container*. Ej: `array('services.yml')`. You typically will define your *commands*, *services*, *listeners*, *subscribers*, etc in these files.
+- **configDirs**: Array of dirs to look up config files in. The application will try to find configuration files in all of the dirs. Defaults to `app/config`.
+- **configFilenames**: Array of config file names, which you want to be loaded into the *container*. 
+E.g.: `array('services.yml')`. You typically will define your *commands*, *services*, *listeners*, *subscribers*, etc in these files.
+By default, application will only try to load `parameters.yml` file.
 
 ### 2. Create a `parameters.yml` file
-This file is **mandatory**, it **must** be located in your `configPath` and it **must** contain, at least, the following info:
+Following parameters are **mandatory**, you may provide them in any config file provided in `$configFilenames` insode `$configDirs`.
+One of your config files **must** contain, at least, the following info:
 
 ```yaml
 parameters:
